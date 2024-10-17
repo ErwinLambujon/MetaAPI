@@ -12,7 +12,6 @@ class FacebookAPI:
         self.page_access_token = None
 
     def verify_token(self, token):
-        """Verify token permissions and expiration"""
         print("\nVerifying token...")
         endpoint = f"{self.base_url}/debug_token"
         params = {
@@ -28,7 +27,6 @@ class FacebookAPI:
             return False
 
     def get_long_lived_token(self):
-        """Convert short-lived token to long-lived token"""
         endpoint = f"{self.base_url}/oauth/access_token"
         params = {
             "grant_type": "fb_exchange_token",
@@ -49,7 +47,6 @@ class FacebookAPI:
             return None
 
     def get_page_access_token(self, long_lived_token):
-        """Get page access token using long-lived user token"""
         endpoint = f"{self.base_url}/{self.page_id}"
         params = {
             "access_token": long_lived_token,
@@ -68,7 +65,6 @@ class FacebookAPI:
             return None
 
     def setup_tokens(self):
-        """Complete token setup process"""
         if not self.verify_token(self.user_access_token):
             print("Initial token verification failed!")
             return False
@@ -87,7 +83,6 @@ class FacebookAPI:
         return True
 
     def get_conversation_threads(self, limit=25):
-        """Retrieve conversation threads for the page"""
         endpoint = f"{self.base_url}/{self.page_id}/conversations"
         params = {
             "access_token": self.page_access_token,
@@ -107,7 +102,6 @@ class FacebookAPI:
             return None
 
     def get_conversation_messages(self, conversation_id, limit=100):
-        """Retrieve messages from a specific conversation"""
         endpoint = f"{self.base_url}/{conversation_id}/messages"
         params = {
             "access_token": self.page_access_token,
@@ -127,7 +121,6 @@ class FacebookAPI:
             return None
 
     def get_all_recent_messages(self, days_ago=30):
-        """Retrieve all messages from recent conversations"""
         if not self.page_access_token:
             print("No page access token available. Run setup_tokens() first.")
             return []

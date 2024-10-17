@@ -27,7 +27,6 @@ class FacebookTokenRequest(BaseModel):
     days_ago: int = 30
 
 
-# Initialize FacebookAPI instance and fetch messages
 @app.post("/fetch-messages/")
 def fetch_messages(data: FacebookTokenRequest):
     fb_api = FacebookAPI(
@@ -40,7 +39,6 @@ def fetch_messages(data: FacebookTokenRequest):
     if not fb_api.setup_tokens():
         return {"status": "error", "message": "Failed to set up tokens."}
 
-    # Fetch messages for the last `days_ago` days
     messages = fb_api.get_all_recent_messages(days_ago=data.days_ago)
 
     if messages:
