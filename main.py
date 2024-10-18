@@ -6,7 +6,6 @@ from facebook_api import FacebookAPI
 
 app = FastAPI()
 
-# Enable CORS for React frontend
 origins = ["http://localhost:3000"]
 app.add_middleware(
     CORSMiddleware,
