@@ -2,9 +2,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
-from facebook_api import FacebookAPI  # Assuming the code you provided is in a file named facebook_api.py
+from facebook_api import FacebookAPI
 
-# Initialize FastAPI app
 app = FastAPI()
 
 # Enable CORS for React frontend
@@ -18,7 +17,6 @@ app.add_middleware(
 )
 
 
-# Model to handle incoming requests
 class FacebookTokenRequest(BaseModel):
     app_id: str
     app_secret: str
